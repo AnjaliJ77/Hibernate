@@ -7,4 +7,175 @@ Steps to install hibernates to our system:
 2. Go to maven repo -> serach with hibernate orm core (select it)-> select updated one-> go below and copy the dependency.
 
 3. come back to eclipse-> select pom.xml-> inside dependencies paste the copied code. and do a maven update(Ryt click for package select maven and update).
+4. Likewise we shoulkd add mysql dependancy also foe exacmple like this inside the POM.xml
+
+<dependency>
+    <groupId>org.hibernate.orm</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>7.1.11.Final</version>
+</dependency>
+
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.33</version>
+</dependency>
+
+After adding, update the maven prjct.
+
+5. Create a resourc folder: new-> resource-> give name(src/main/resource)-> save
+6. Inside Resource we should create hibernate.cfn.xml  file.
+
+inside that xml(Depends on our project we have to give the proper info here(
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Database Connection -->
+          <!-- we  should give info abt our class, name,pwd and URL-->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate-dec</property>         // hibernate-dec ntng but a SCHEMA name
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+
+        <!-- Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+        <!-- Hibernate Settings -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Mapping your Entity Class -->
+        <mapping class="com.hybernates.java.hybernates_java.emptable"/>                                    // it containes package complete name with the class name.
+        <!-- Add more mappings here -->
+        
+    </session-factory>
+</hibernate-configuration>
+
+
+
+
+-------------------------------------------------
+
+we should create a Class(pojo class)
+
+emptable.java
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity       //Hibernate scans all @Entity classes when building the SessionFactory. If your class doesn’t have @Entity, Hibernate will ignore it.
+public class emptable {
+	
+	
+	//id is our primary key hence we should use annotation here
+	// Coulm : By deafult Hibernate assumes the column name is the same as the java field name. we use @column  to map a field name 
+
+	@Id
+	@Column(name="Empid")              
+	int Empid;
+	
+	@Column(name="EmpName")
+	String EmpName;
+	
+	@Column(name="dep")
+	String dep;
+	
+	@Column(name="Sal")
+	double sal;
+	
+	
+	public int getEmpid() {
+		return Empid;
+	}
+	public void setEmpid(int empid) {
+		Empid = empid;
+	}
+	public String getEmpName() {
+		return EmpName;
+	}
+	public void setEmpName(String empName) {
+		EmpName = empName;
+	}
+	public String getDep() {
+		return dep;
+	}
+	public void setDep(String doj) {
+		this.dep = doj;
+	}
+	@Override
+	public String toString() {
+		return "emptable [Empid=" + Empid + ", EmpName=" + EmpName + ", dep=" + dep + ", sal=" + sal + "]";
+	}
+	public double getSal() {
+		return sal;
+	}
+	public void setSal(double sal) {
+		this.sal = sal;
+	}
+}
+
+
+------------------
+within our pcakage there will be one App class
+inside that
+
+package com.hybernates.java.hybernates_java;
+
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	
+        //System.out.println( "Hello World!" );
+    	// To use session factory we need to create a configuration
+    
+    	Configuration conf=new Configuration();
+    	conf.configure("hibernate.cfg.xml");     // it fetch the xml file
+    	conf.addAnnotatedClass(emptable.class);      // this will refer entity annotation class
+    	
+    	
+    	// to create session we need session Factory. We should create only one Sfactory and we can create multiple sessions and use it.
+    	SessionFactory fact=conf.buildSessionFactory();
+    	
+    	// 
+    	Session session = fact.openSession();      //opening session
+    	
+    	emptable e1=new emptable();
+    	e1.setEmpid(2);
+    	e1.setEmpName("MeghuJ");
+    	e1.setDep("HR");
+    	e1.setSal(200000);
+    	
+    	
+    	session.beginTransaction();        // to insert the data we should begin the transactions
+    	
+    	session.persist(e1);               // save method got deprecicated so we are using persist here
+    	
+    	session.getTransaction().commit();    // commit is ntng like a save
+    	
+    	System.out.println("DB....");
+    	
+    	
+    }
+}
+
+
+If u get any Errors related to mysql----> c drive /users/ourFolder/m2/mysql/ check if any extra sql are der just remove it
+
+
 

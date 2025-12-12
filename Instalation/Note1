@@ -1,0 +1,10 @@
+Hibernates:
+
+Steps to install hibernates to our system:
+1. First create a maven prjct in eclipse: new-> others-> mavan prjct-> quickstype arc-> give name(com.java.hibernate)-> atifact id(hibernate_first_prjct)>
+  inside the src will see src folder-> app.java file
+
+2. Go to maven repo -> serach with hibernate orm core (select it)-> select updated one-> go below and copy the dependency.
+
+3. come back to eclipse-> select pom.xml-> inside dependencies paste the copied code. and do a maven update(Ryt click for package select maven and update).
+

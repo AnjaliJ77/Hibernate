@@ -178,4 +178,5 @@ public class App
 If u get any Errors related to mysql----> c drive /users/ourFolder/m2/mysql/ check if any extra sql are der just remove it
 
 
+DATA RESOURCE: it manages the database (Session factory)
 

@@ -24,7 +24,11 @@ Steps to install hibernates to our system:
 After adding, update the maven prjct.
 
 5. Create a resourc folder: new-> resource-> give name(src/main/resource)-> save
+
 6. Inside Resource we should create hibernate.cfn.xml  file.
+***** How to instal Hibernate helper plugin:
+Help-Eclipse market place-> search with Hibernate tool-> scroll down select jboss-> install
+Deselect everything-> chgeck only hibernate tool and confirm-> accept agree and finish-> Restart-> ryt click on resource and select new -> other-> search with hibernate-> give the required info(no need to mention anything manually) or we can just finish it and later we can manually fill it.
 
 inside that xml(Depends on our project we have to give the proper info here(
 

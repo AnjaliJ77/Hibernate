@@ -72,6 +72,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity       //Hibernate scans all @Entity classes when building the SessionFactory. If your class doesn’t have @Entity, Hibernate will ignore it.
+@Tbale(name="table name")      // we can modify table name also
 public class emptable {
 	
 	

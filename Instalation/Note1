@@ -200,6 +200,50 @@ System.out.println("Fetching data");
 
 
 
+
+
+Updating data*********************************
+
+Student s1=new Student();
+		s1.setSid(2);
+		s1.setSname("MeghanaJ"); ////old one s1.setname("megh"); we are updating it to MeghanaJ
+		s1.setFeese(970000);
+
+		
+		Configuration con=new Configuration();
+		con.configure();
+		con.addAnnotatedClass(Student.class);
+		
+		SessionFactory factory=con.buildSessionFactory();
+		
+		Session ses= factory.openSession();
+		Student a1 = ses.byId(Student.class).getReference(1);     // lazy fetching 
+		System.out.println(a1);
+		
+		System.out.println();
+		Student a2 = ses.find(Student.class, 02);    // eager fetching 
+		
+		System.out.println(a2);
+		
+		
+		org.hibernate.Transaction tra = ses.beginTransaction();     // Transaction is not mandatory for fetching data. but it's mandatory to modify or update data.
+		
+		ses.merge(s1);
+		tra.commit();
+		
+		System.out.println("after merging");
+		System.out.println(a2);
+
+Deleting data************
+
+Student delete = ses.find(Student.class, 3);
+		ses.remove(delete);
+		tra.commit();
+		System.out.println(" deleting......");
+		//System.out.println(delete);
+
+
+
 --------------------------------------------
 
 

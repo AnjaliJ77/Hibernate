@@ -1,0 +1,50 @@
+When we fetch for the data for first hibernate give us the data from the DB:
+For the second time frst level cache gibes the data, so that no need to go DB.
+
+1st 1s 1  :  Hibernadefaultly give 1st level cache . ex: 
+
+package com.hybernates.java.hybernates_java;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class CacheInHiber {
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		Student s1=new Student();
+		
+		Configuration con=new Configuration();
+		con.configure();
+		con.addAnnotatedClass(Student.class);
+		
+		SessionFactory factory = con.buildSessionFactory();
+		
+		Session session1 = factory.openSession();
+		//session1.persist(s1);
+		session1.beginTransaction();
+		session1.getTransaction().commit();
+		
+		
+		System.out.println("First level cacheing");
+		Object res = session1.get(Student.class, 1);
+		
+		System.out.println("obj1"+res);
+		System.out.println("Second time");
+		Object res1 = session1.get(Student.class, 1);
+		
+		System.out.println("obj2: "+res1);
+		
+		
+
+	}
+
+}
+
+Second level cache:

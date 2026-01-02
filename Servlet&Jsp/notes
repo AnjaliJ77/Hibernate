@@ -1,1 +1,59 @@
 
+J Servlet and JSP
+
+Web App: web site where generate the HTML pages are generated dynamically.
+
+Servlet(Interface) java file it can take the request from the client and priovide the responce like a html file.
+
+
+Creation :
+in eclipse open perspective and select Java EE( Servers option will be enabled)
+
+Configuration of Tomcat(web container)
+download Tomcat and tomcat documentation-> in server click on the link and choose the apache
+ select version-> give location and finish.
+
+
+how to configure tomacat in eclipse
+inside server tab will get an link to add tomact select and select the version, give path finish it
+
+___________________________________________________
+
+What is JSP file?
+an HTML page witj some java code
+include dynamic content from javacode
+
+it processed on the server
+
+Where to place JSP file:   
+goes into Web content folder
+must have .jsp extension
+
+_________________________________________
+JSP scripting elements:
+1. JSP exression: syntax:     <%=some java epression %>
+ex: the time on the server is <%= new java.util.Date() %>
+ To upper case <%= new String("Hello J").toUpper() %>
+
+2. JSP sciptlet:    <% some java code: 1 to many lines %>.
+Inser 1 to many lines of Java code.
+to include content in the page use: out.println()
+
+
+3. JSP Declaration:   <%! variables or method declaration %>
+we can declare a method in the jsp
+call method n the same jsp
+
+
+-------------------------------------------------
+First time sending the request to server, init method will invoke and servoce method will invoke.
+
+second time sending the request, service method will get invoked,.
+
+Destroy and init method gets invoke only one time.
+
+*****************************************
+
+
+
+

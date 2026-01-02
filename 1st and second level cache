@@ -48,3 +48,67 @@ public class CacheInHiber {
 }
 
 Second level cache:
+
+1. add below dependecy to pom.xml
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>5.6.15.Final</version>
+</dependency>
+
+//
+<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+//
+
+
+
+Enable Second Level Cache in hibernate.cfg.xml
+<!-- Enable second level cache -->
+<property name="hibernate.cache.use_second_level_cache">true</property>
+
+<!-- Enable query cache (optional but useful) -->
+<property name="hibernate.cache.use_query_cache">true</property>
+
+<!-- Cache provider -->
+<property name="hibernate.cache.region.factory_class">
+    org.hibernate.cache.ehcache.EhCacheRegionFactory
+</property>
+
+
+2. Create a new file: Add ehcache.xml file
+src/main/resources/ehcache.xml
+
+<ehcache>
+    <defaultCache
+        maxEntriesLocalHeap="1000"
+        eternal="false"
+        timeToIdleSeconds="300"
+        timeToLiveSeconds="600"
+        overflowToDisk="false"/>
+
+    <cache
+        name="com.example.model.Employee"
+        maxEntriesLocalHeap="500"
+        timeToLiveSeconds="600"/>
+</ehcache>
+
+
+3.  Enable cache on Entity class
+
+In your Entity class, add 
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
+
+
+@generatedValue(strategy=GenerationType.AUTO)---> it increase the value automatically. and no need to give id manually if we add this annotation.
+
+
+
+second way:
+Hibernate mapping file not required(replacement of mapping file, we write below entity class).
+
+@entity
+@Table(name="Table name")
+

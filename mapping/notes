@@ -1,0 +1,22 @@
+Mapping:
+It establish the connection b/w two entity class.
+
+1 to many: 1 company can have many employees
+many to one: many employees have one company
+1 to 1: one person can have one laptop
+many to many: multiple ppl can read multiple books
+
+
+1 to 1
+One-to-One mapping means one row in a table is associated with exactly one row in another table.
+owner and pet: owner will be the source 
+in owner we should create pet variable private pet pet; and getter and setter.
+In owner only we should have FK: @OneToOne(mappedBy="Ownerclass")
+@joinColumn(name="pet_id, referencedColumnName="id"))
+
+
+In Pet class:
+
+@OneToOne(cascade=casescadeType.All)
+@joinColumn(name=wonerid");   FK
+private Ownerid ownerid;

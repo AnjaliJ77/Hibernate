@@ -1,0 +1,65 @@
+Inheritance in hibernate
+1. Single table
+2. Joined 
+3. table per class
+
+
+
+1. Single Table:
+All parent and child classes are stored in ONE database table.
+
+Hibernate adds a discriminator column to identify which row belongs to which class.
+STRATEGY
+One table for all classes
+Uses Discriminator column
+Some columns will be NULL
+
+
+2. Joined
+Each class has its own table
+👉 Parent table stores common fields
+👉 Child tables store specific fields
+👉 All tables are linked using PRIMARY KEY + FOREIGN KEY
+
+Hibernate uses JOINs when fetching data.
+When should you use JOINED?
+✔ Clean database design
+✔ No NULL columns
+✔ Easy to understand DB
+❌ Slightly slower than Single Table (because of JOINs)
+
+
+3. Table Per Class
+Table Per Class is an inheritance mapping strategy where:
+Each concrete class has its own table
+Parent class does NOT have a table
+Subclass tables contain all fields, including inherited fields
+
+Use when:
+
+Each subclass is independent
+You rarely query the parent class
+You want no joins between tables
+
+❌ Avoid when:
+You frequently query the base class
+Large number of subclasses (performance issue)
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private double amount;
+
+
+
+Child class
+@Entity
+public class CreditCardPayment extends Payment {
+    private String cardNumber;
+}
+
+“In TABLE_PER_CLASS inheritance, neither @DiscriminatorColumn nor @JoinColumn is required because each subclass has its own independent table.”

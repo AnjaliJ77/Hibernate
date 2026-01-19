@@ -4,7 +4,7 @@ J Servlet and JSP
 Web App: web site where generate the HTML pages are generated dynamically.
 
 Servlet(Interface) java file it can take the request from the client and priovide the responce like a html file.
-
+Servlet: Is ntng but a java class, which accept the incoming request, process it and returns the response.
 
 Creation :
 in eclipse open perspective and select Java EE( Servers option will be enabled)

@@ -1,6 +1,62 @@
 
 J Servlet and JSP
 
+Servlet: is a Java program that runs on a server and is used to handle web requests and responses. It is part of Java’s server-side web development.
+Think of a servlet as the bridge between a client (browser/postman) and your server-side logic.
+
+Why Do We Need Servlets?
+Before frameworks like Spring, Java web apps were built directly using Servlets.
+Servelts help with:
+
+Handling browser requests
+Processing data from forms
+Generating dynamic content
+Managing sessions/cookies
+Connecting UI to backend logic
+
+How Spring Boot relates to Servlets?
+Spring Boot hides servlets from you by providing:
+
+Controllers (@RestController)
+Embedded servlet container (Tomcat)
+DispatcherServlet (central controller)
+
+Under the hood, Spring MVC still uses servlets — just more advanced and easy to use.
+
+
+
+
+
+-----------------------------
+DispatcherServlet is the front controller in Spring MVC.
+It sits at the front of your application and handles every incoming HTTP request before it reaches your controllers.
+Think of it as a traffic controller:
+
+Receives all requests
+Decides where to send them
+Executes controller logic
+Prepares and sends the response
+
+Without it, Spring MVC would not work.
+
+
+------------------
+What is an Embedded Servlet Container (Tomcat)?
+An embedded servlet container is a built‑in web server that runs inside your Spring Boot application.
+The most common one is Tomcat, but Spring Boot can also use Jetty or Undertow.
+In simple words:
+👉 You don’t install Tomcat separately.
+👉 Tomcat is packaged inside your Spring Boot jar.
+👉 When you run your application, Tomcat starts automatically.
+
+
+
+
+
+
+
+
+
 Web App: web site where generate the HTML pages are generated dynamically.
 
 Servlet(Interface) java file it can take the request from the client and priovide the responce like a html file.
